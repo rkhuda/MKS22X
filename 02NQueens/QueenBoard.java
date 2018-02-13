@@ -19,44 +19,38 @@ public class QueenBoard {
 		    ans = ans + "Q ";
 		}
 		if (board[x][y] != 1) {
-		    ans = ans + board[x][y] + " ";
+		    ans = ans +  "_ ";
 		}
 	    }
 	    ans = ans + "\n";
 	}
 	return ans;
     }
-    /* 
+    
     public boolean solve(){
 	if (board[0][0] != 0) {
 	    throw new IllegalStateException();
 	}
-	for (int x = 0; x < board.length; x++) {
-	    for (int y = 0; y < board[x].length; y++) {
-		if (board[x][y] == 0) {
-		    addQueen(x, y);
-		}
-		//return solveHelper(y);
-	    }
-	}
-	return true;
+	return solveHelper(0);
     }
-   
+    
     public boolean solveHelper(int col){
-	if (col passes last col) {
+	if (col > board[0].length) {
 	    return true;
 	}
-	for (each row) {
-	    if (addQueen()){
-		if (solveR(col + 1)){
-		return true;
+	for (int x = 0; x < board.length; x++) {
+	    for (int y = 0; y < board[x].length; y++) {
+		if (addQueen(x, y)){
+		    if (solveHelper(col + 1)) {
+			return true;
+		    }
 		}
+		//removeQueen(x, y);
 	    }
-	    removeQueen();   
 	}
 	return false;
     }
-    
+    /*
     public int countSolutions(){
 	if (board[0][0] != 0) {
 	    throw new IllegalStateException();
@@ -69,7 +63,7 @@ public class QueenBoard {
 	}
 	for (int x = 0; x < board.length; x++) {
 	    for (int y = 0; y < board[r].length; y++) {
-		if (x == r || y == c || x+y == r || x-y == r) {
+		if (x == r || y == c || x+y == r+c || x-y == r-c) {
 		    board[x][y] = -1;
 		}
 	    }
@@ -91,7 +85,9 @@ public class QueenBoard {
 	
 	//System.out.println(a.toString());
 	
-	a.addQueen(0, 0);	
+	//a.addQueen(0, 0);	
+	//System.out.println(a.toString());
+	a.solve();
 	System.out.println(a.toString());
 	
 	//a.addQueen(2, 1);
