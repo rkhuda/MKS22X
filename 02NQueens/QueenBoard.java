@@ -67,23 +67,28 @@ public class QueenBoard {
 	board[r][c] = 1;
 	return true;
     }
-    /*
+    
     private boolean removeQueen(int r, int c){
 	if (board[r][c] != 1) {
 	    return false;
 	}
+	board[r][c] = 0;
+	return true;
     }
-    */
+    
     public static void main(String[] args){
 	QueenBoard a = new QueenBoard(5);
 	
-	//System.out.println(test.toString());
+	//System.out.println(a.toString());
 	
-	//test.addQueen(0, 0);	
-	//System.out.println(test.toString());
+	//a.addQueen(0, 0);	
+	//System.out.println(a.toString());
 	
-	//test.addQueen(2, 1);
-	//System.out.println(test.toString());
+	//a.addQueen(2, 1);
+	//System.out.println(a.toString());
+
+	//a.removeQueen(0, 0);
+	//System.out.println(a.toString());
 	
     }
 }
