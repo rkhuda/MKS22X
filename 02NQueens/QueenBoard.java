@@ -20,6 +20,7 @@ public class QueenBoard {
 		}
 		if (board[x][y] != 1) {
 		    ans = ans +  "_ ";
+		    //ans = ans + board[x][y] + " ";
 		}
 	    }
 	    ans = ans + "\n";
@@ -35,18 +36,16 @@ public class QueenBoard {
     }
     
     public boolean solveHelper(int col){
-	if (col > board[0].length) {
+	if (col > board[0].length - 1) {
 	    return true;
 	}
 	for (int x = 0; x < board.length; x++) {
-	    for (int y = 0; y < board[x].length; y++) {
-		if (addQueen(x, y)){
+		if (addQueen(x, col)){
 		    if (solveHelper(col + 1)) {
 			return true;
 		    }
+		    removeQueen(x, col);
 		}
-		//removeQueen(x, y);
-	    }
 	}
 	return false;
     }
@@ -76,25 +75,40 @@ public class QueenBoard {
 	if (board[r][c] != 1) {
 	    return false;
 	}
+	for (int x = 0; x < board.length; x++) {
+	    for (int y = 0; y < board[r].length; y++) {
+		if (x == r || y == c || x+y == r+c || x-y == r-c) {
+		    board[x][y] = 0;
+		}
+	    }
+	}
 	board[r][c] = 0;
 	return true;
     }
     
     public static void main(String[] args){
-	QueenBoard a = new QueenBoard(5);
-	
-	//System.out.println(a.toString());
-	
-	//a.addQueen(0, 0);	
-	//System.out.println(a.toString());
-	a.solve();
-	System.out.println(a.toString());
-	
-	//a.addQueen(2, 1);
-	//System.out.println(a.toString());
+	QueenBoard b = new QueenBoard(4);
 
-	//a.removeQueen(0, 0);
-	//System.out.println(a.toString());
-	
+	System.out.println(b.solve()); //prints true
+	System.out.println(b); //prints a valid solution
+	/*
+	try{
+	    b.solve();
+	}catch(IllegalStateException e){
+	    System.out.println("Error: The board contains non-zero values");
+	} //prints "Error: The board contains non-zero values"
+
+	try{
+	    b.countSolutions();
+	}catch(IllegalStateException e){
+	    System.out.println("Error: The board contains non-zero values");
+	} //prints "Error: The board contains non-zero values"
+
+	for (int i = 0; i < 12; i++){
+	    QueenBoard a = new QueenBoard(i);
+	    System.out.println("# of Solutions for " + i + ": " + a.countSolutions());
+	}
+	*/
     }
+	
 }
