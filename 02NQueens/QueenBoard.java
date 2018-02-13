@@ -19,22 +19,29 @@ public class QueenBoard {
 		    ans = ans + "Q ";
 		}
 		if (board[x][y] != 1) {
-		    ans = ans + "_ ";
+		    ans = ans + board[x][y] + " ";
 		}
 	    }
 	    ans = ans + "\n";
 	}
 	return ans;
     }
-    /*
+    /* 
     public boolean solve(){
+	if (board[0][0] != 0) {
+	    throw new IllegalStateException();
+	}
 	for (int x = 0; x < board.length; x++) {
 	    for (int y = 0; y < board[x].length; y++) {
-		return solveHelper(y);
+		if (board[x][y] == 0) {
+		    addQueen(x, y);
+		}
+		//return solveHelper(y);
 	    }
 	}
+	return true;
     }
-
+   
     public boolean solveHelper(int col){
 	if (col passes last col) {
 	    return true;
@@ -51,6 +58,9 @@ public class QueenBoard {
     }
     
     public int countSolutions(){
+	if (board[0][0] != 0) {
+	    throw new IllegalStateException();
+	}
     }
     */
     private boolean addQueen(int r, int c) {
@@ -59,7 +69,7 @@ public class QueenBoard {
 	}
 	for (int x = 0; x < board.length; x++) {
 	    for (int y = 0; y < board[r].length; y++) {
-		if (x == r || y == c) {
+		if (x == r || y == c || x+y == r || x-y == r) {
 		    board[x][y] = -1;
 		}
 	    }
@@ -81,8 +91,8 @@ public class QueenBoard {
 	
 	//System.out.println(a.toString());
 	
-	//a.addQueen(0, 0);	
-	//System.out.println(a.toString());
+	a.addQueen(0, 0);	
+	System.out.println(a.toString());
 	
 	//a.addQueen(2, 1);
 	//System.out.println(a.toString());
