@@ -127,7 +127,7 @@ public class QueenBoard {
 	return true;
     }
     
-    public static void main(String[] args){
+    //public static void main(String[] args){
 	//QueenBoard b = new QueenBoard(5);
 
 	//System.out.println(b.solve()); //prints true
@@ -153,6 +153,6 @@ public class QueenBoard {
 	    System.out.println("# of Solutions for " + i + ": " + a.countSolutions());
 	}
 	*/
-    }
+    //}
 	
 }
