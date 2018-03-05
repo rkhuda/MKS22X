@@ -48,7 +48,18 @@ public class Maze {
     }
 
     public int solve(){
-	return solve(???, ???);
+	int row = 0;
+	int col = 0;
+	for (int x = 0; x < maze.length; x++) {
+	    for (int y = 0; y < maze[x].length; y++) {
+		if (maze[x][y] == 'S') {
+		    row = x;
+		    col = y;
+		    maze[x][y] = '@';
+		}
+	    }
+	}
+	return solve(row, col);
     }
 
     private int solve(int row, int col) {
