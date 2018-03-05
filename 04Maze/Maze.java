@@ -5,6 +5,7 @@ public class Maze {
     
     private char[][] maze;
     private boolean animate;
+    private int[][] moveCoordinate = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
 
     public Maze(String filename) throws FileNotFoundException {
 
@@ -19,31 +20,34 @@ public class Maze {
 	    linesCT = linesCT + 1;
 	    line = inf.nextLine();
 	}
-	maze = new char[linesCT][line.length];
+	maze = new char[linesCT][line.length()];
 
-	int x = 0;
-	while (inf.hasNextLine() && x < maze.length) {
+	while (inf.hasNextLine()){
 	    line = inf.nextLine();
-	    char[] charArray = line.toCharArray();
-	    maze[x] = charArray;
-	    x++;
+	    for (int x = 0; x < maze.length; x++) {
+		int index = 0;
+		for (int y = 0; y < maze[x].length; y++) {
+		    maze[x][y] = line.charAt(index);
+		    index = index + 1;
+		}
+	    }
 	}
 
 	int numS = 0;
 	int numE = 0;
 	for (int x = 0; x < maze.length; x++) {
-	    for (int y = 0; y < maze[x].length; x++) {
+	    for (int y = 0; y < maze[x].length; y++) {
 		if (maze[x][y] == 'S') {
 		    numS = numS + 1;
 		}
-		else if (maze[x][y] = 'E') {
+		if (maze[x][y] == 'E') {
 		    numE = numE + 1;
 		}
 	    }
 	}
 
-	if (numS > 1 || numS < 1 || numsE > 1 || nums E < 1) {
-	    throw new IllegalStateException();
+	if (numS != 1 || numE != 1) {
+	   throw new IllegalStateException();
 	}
 	
     }
@@ -76,39 +80,34 @@ public class Maze {
 		}
 	    }
 	}
-	return solve(row, col, false);
+	return solve(row, col);
     }
 
-    private int solve(int row, int col, boolean ans) {
+    private int solve(int row, int col) {
 	if (animate) {
 	    clearTerminal();
 	    System.out.println(this);
 	    wait(20);
 	}
+	
+	if (maze[row][col] == 'E') {
+	    return 1;
+	}
 
 	int CT = 0;
-	
-	if (board[row][col] == 'E') {
-	    ans = true;
-	    //return CT;
-	}
-	
-	for (int x = 0; x < maze.length; x++) {
-	    for (int y = 0; y < maze[x].length; y++) {
-		if (board[row][col] != '.' &&) {
-		    board[row][col] = '@';
-		    CT = CT + 1;
-		    if (ans) {
-			return CT;
-		    }
-		    else {
-			board[row][col] = '.';
-			CT = CT - 1;
-		    }
-		}
+	for (int x = 0; x < moveCoordinate.length; x++) {
+	    if (maze[row][col] == ' ') {
+		    maze[row][col] = '@';
+		    CT = CT + solve(row + moveCoordinate[x][1],
+			  col + moveCoordinate[x][0]);
+		    
+	    }
+	    if (maze[row - moveCoordinate[x][1]][col - moveCoordinate[x][0]] ==
+		'@') {
+		maze[row][col] = '.';
+		solve(row - moveCoordinate[x][1], col - moveCoordinate[x][0]);
 	    }
 	}
-
 	return -1;
     }
 
@@ -123,10 +122,10 @@ public class Maze {
 	return ans;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 	
 	Maze f;
-	f = new Maze("data1.dat");
+	f = new Maze("data.txt");
 
 	f.setAnimate(true);
 	f.solve();
