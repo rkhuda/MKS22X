@@ -28,6 +28,23 @@ public class Maze {
 	    maze[x] = charArray;
 	    x++;
 	}
+
+	int numS = 0;
+	int numE = 0;
+	for (int x = 0; x < maze.length; x++) {
+	    for (int y = 0; y < maze[x].length; x++) {
+		if (maze[x][y] == 'S') {
+		    numS = numS + 1;
+		}
+		else if (maze[x][y] = 'E') {
+		    numE = numE + 1;
+		}
+	    }
+	}
+
+	if (numS > 1 || numS < 1 || numsE > 1 || nums E < 1) {
+	    throw new IllegalStateException();
+	}
 	
     }
 
@@ -68,7 +85,19 @@ public class Maze {
 	    System.out.println(this);
 	    wait(20);
 	}
+	
 	return -1;
+    }
+
+    public String toString() {
+	String ans = "";
+	for (int x = 0; x < maze.length; x++) {
+	    for (int y = 0; y < maze[x].length; y++) {
+		ans = ans + maze[x][y];
+	    }
+	    ans = ans + "\n";
+	}
+	return ans;
     }
     
     public static void main(String[] args) {
