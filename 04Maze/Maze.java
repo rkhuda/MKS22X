@@ -76,16 +76,39 @@ public class Maze {
 		}
 	    }
 	}
-	return solve(row, col);
+	return solve(row, col, false);
     }
 
-    private int solve(int row, int col) {
+    private int solve(int row, int col, boolean ans) {
 	if (animate) {
 	    clearTerminal();
 	    System.out.println(this);
 	    wait(20);
 	}
+
+	int CT = 0;
 	
+	if (board[row][col] == 'E') {
+	    ans = true;
+	    //return CT;
+	}
+	
+	for (int x = 0; x < maze.length; x++) {
+	    for (int y = 0; y < maze[x].length; y++) {
+		if (board[row][col] != '.' &&) {
+		    board[row][col] = '@';
+		    CT = CT + 1;
+		    if (ans) {
+			return CT;
+		    }
+		    else {
+			board[row][col] = '.';
+			CT = CT - 1;
+		    }
+		}
+	    }
+	}
+
 	return -1;
     }
 
