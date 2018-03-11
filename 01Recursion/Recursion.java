@@ -47,9 +47,9 @@ public class Recursion {
 	}
 	return sqrtHelp(n, (n / guess + guess) / 2);
     }
-    
+    /*
     public static void main(String[] args) {
-	/*
+	
 	System.out.println(fact(-2));
 	System.out.println(fact(0));
 	System.out.println(fact(1));
@@ -68,12 +68,12 @@ public class Recursion {
 	System.out.println(fib(7));
 	System.out.println(fib(8));
 	System.out.println(fib(9));
-	*/
-	//System.out.println(sqrt(-3));
+	
+	System.out.println(sqrt(-3));
 	System.out.println(sqrt(4));
 	System.out.println(sqrt(10));
 	System.out.println(sqrt(100));
 	
     }
-    
+    */
 }
