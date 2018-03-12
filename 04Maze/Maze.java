@@ -1,53 +1,66 @@
 import java.util.*;
 import java.io.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Maze {
     
     private char[][] maze;
     private boolean animate;
     private int[][] moveCoordinate = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
 
-    public Maze(String filename) throws FileNotFoundException {
+    public Maze(String filename) {
 
 	animate = false;
 
-	File text = new File(filename);
-	Scanner inf = new Scanner(text);
+	try{
+	    File text = new File(filename);
+	    Scanner inf = new Scanner(text);
 
-	int linesCT = 0;
-	String line = "";
-	while(inf.hasNextLine()){
-	    linesCT = linesCT + 1;
-	    line = inf.nextLine();
-	}
-	maze = new char[linesCT][line.length()];
+	    int row = 0;
+	    int col = 0;
+	    
+	    while(inf.hasNextLine()){
+		row = row + 1;
+		String line = inf.nextLine();
+		col = line.length();
+	    }
+	    
+	    maze = new char[row][col];
 
-	while (inf.hasNextLine()){
-	    line = inf.nextLine();
+	    File text2 = new File(filename);
+	    Scanner inf2 = new Scanner(text2);
+	    while (inf2.hasNextLine()){
+		String line = inf2.nextLine();
+		for (int x = 0; x < maze.length; x++) {
+		    for (int y = 0; y < maze[x].length; y++) {
+			maze[x][y] = line.charAt(y);
+		    }
+		}
+	    }
+
+	    int numS = 0;
+	    int numE = 0;
 	    for (int x = 0; x < maze.length; x++) {
-		int index = 0;
 		for (int y = 0; y < maze[x].length; y++) {
-		    maze[x][y] = line.charAt(index);
-		    index = index + 1;
+		    if (maze[x][y] == 'S') {
+			numS = numS + 1;
+		    }
+		    if (maze[x][y] == 'E') {
+			numE = numE + 1;
+		    }
 		}
 	    }
-	}
 
-	int numS = 0;
-	int numE = 0;
-	for (int x = 0; x < maze.length; x++) {
-	    for (int y = 0; y < maze[x].length; y++) {
-		if (maze[x][y] == 'S') {
-		    numS = numS + 1;
-		}
-		if (maze[x][y] == 'E') {
-		    numE = numE + 1;
-		}
+	    if (numS != 1 || numE != 1) {
+		throw new IllegalStateException();
 	    }
+	    
 	}
-
-	if (numS != 1 || numE != 1) {
-	   throw new IllegalStateException();
+	catch (FileNotFoundException e) {
+	    System.out.println("File not found");
 	}
 	
     }
@@ -120,17 +133,5 @@ public class Maze {
 	    ans = ans + "\n";
 	}
 	return ans;
-    }
-    
-    public static void main(String[] args) throws FileNotFoundException {
-	
-	Maze f;
-	f = new Maze("data.txt");
-
-	f.setAnimate(true);
-	f.solve();
-
-	System.out.println(f);
-	
     }
 }
