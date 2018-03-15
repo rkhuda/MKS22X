@@ -3,7 +3,12 @@ import java.util.*;
 
 public class Quick {
 
-    //public static void quicksort(int[] ary){}
+    //public static void quicksort(int[] ary){
+
+    //int start = 0;
+    //int end = ary.length - 1;
+	
+    //}
 
     public static int quickselect(int[] ary, int k) {
 
@@ -55,7 +60,7 @@ public class Quick {
 	data[index1] = data[index2];
 	data[index2] = tracker;
     }
-
+    /*
     public static void main(String[] args){
 
 	int[] data = {17, 61, 67, 47, 93, 12, 20, 4, 44, 68};
@@ -65,4 +70,5 @@ public class Quick {
 	System.out.println(quickselect(data, 2));
 	System.out.println(Arrays.toString(data));
     }
+    */
 }
