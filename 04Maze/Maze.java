@@ -21,36 +21,33 @@ public class Maze {
 
 	    int row = 0;
 	    int col = 0;
+	    String all = "";
 	    
 	    while(inf.hasNextLine()){
-		row = row + 1;
 		String line = inf.nextLine();
+		row = row + 1;
 		col = line.length();
+		all = all + line;
 	    }
 	    
 	    maze = new char[row][col];
 
-	    File text2 = new File(filename);
-	    Scanner inf2 = new Scanner(text2);
-	    while (inf2.hasNextLine()){
-		String line = inf2.nextLine();
-		for (int x = 0; x < maze.length; x++) {
-		    for (int y = 0; y < maze[x].length; y++) {
-			maze[x][y] = line.charAt(y);
-		    }
-		}
-	    }
-
+	    int CT = 0;
 	    int numS = 0;
 	    int numE = 0;
 	    for (int x = 0; x < maze.length; x++) {
 		for (int y = 0; y < maze[x].length; y++) {
+
+		    maze[x][y] = all.charAt(CT);
+
 		    if (maze[x][y] == 'S') {
 			numS = numS + 1;
 		    }
 		    if (maze[x][y] == 'E') {
 			numE = numE + 1;
 		    }
+
+		    CT = CT + 1;
 		}
 	    }
 
@@ -89,38 +86,41 @@ public class Maze {
 		if (maze[x][y] == 'S') {
 		    row = x;
 		    col = y;
-		    maze[x][y] = '@';
+		    maze[x][y] = ' ';
 		}
 	    }
 	}
-	return solve(row, col);
+	return solve(row, col, 0);
     }
-
-    private int solve(int row, int col) {
+    
+    private int solve(int row, int col, int CT) {
 	if (animate) {
 	    clearTerminal();
 	    System.out.println(this);
 	    wait(20);
 	}
-	
-	if (maze[row][col] == 'E') {
-	    return 1;
-	}
 
-	int CT = 0;
-	for (int x = 0; x < moveCoordinate.length; x++) {
-	    if (maze[row][col] == ' ') {
-		    maze[row][col] = '@';
-		    CT = CT + solve(row + moveCoordinate[x][1],
-			  col + moveCoordinate[x][0]);
-		    
-	    }
-	    if (maze[row - moveCoordinate[x][1]][col - moveCoordinate[x][0]] ==
-		'@') {
-		maze[row][col] = '.';
-		solve(row - moveCoordinate[x][1], col - moveCoordinate[x][0]);
-	    }
+	if (maze[row][col] == 'E') {
+	    return CT;
 	}
+	
+	for (int x = 0; x < moveCoordinate.length; x++) {
+
+	    int xcor = row + moveCoordinate[x][1];
+	    int ycor = col + moveCoordinate[x][0];
+
+	    maze[row][col] = '@';
+
+	    if (maze[xcor][ycor] == ' ' || maze[xcor][ycor] == 'E'){
+		int ans = solve(xcor, ycor, CT + 1);
+		if (ans != -1){
+		    return ans;
+		}
+	    }
+	    
+	    maze[row][col] = '.';
+	}
+	
 	return -1;
     }
 
