@@ -134,4 +134,15 @@ public class Maze {
 	}
 	return ans;
     }
+    
+    /*
+    public static void main(String[] args) {
+	
+	Maze f;
+	f = new Maze("data1.dat");
+	f.setAnimate(true);
+	System.out.println(f.solve());
+	System.out.println(f);
+    }
+    */
 }
