@@ -19,15 +19,6 @@ public class USACO {
 		lake[x][y] = inf.nextInt();
 	    }
 	}
-	
-	/*
-	int[][] instructions = new int[moves][3];
-	for (int x = 0; x < moves; x++) {
-	    for (int y = 0; y < 3; y++) {
-		instructions[x][y] = inf.nextInt();
-	    }
-	}
-	*/
 
 	int[] instructions = new int[3];
 	int CT = 0;
@@ -38,14 +29,12 @@ public class USACO {
 	    
 	    for (int x = 0; x < 3; x++) {
 		instructions[x] = inf.nextInt();
-		//System.out.println(instructions[x]);
 	    }
 
 	    for (int x = instructions[0] - 1; x < instructions[0] + 2; x++){
 		for (int y = instructions[1] - 1; y < instructions[1] + 2; y++) {
 		    if (lake[x][y] > max) {
 			max = lake[x][y];
-			//System.out.println(max);
 		    }
 		}
 	    }
