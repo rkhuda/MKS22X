@@ -3,9 +3,19 @@ import java.util.*;
 
 public class Quick {
 
-    //public static void quicksort(int[] ary){
-	
-    //}
+    public static void quicksort(int[] ary){
+	quicksort(ary, 0, ary.length - 1);
+    }
+
+    private static void quicksort(int[] data, int start, int end){
+	while (start < end){
+	    int pivot = partition(data, start, end);
+	    quicksort(data, start, pivot - 1);
+	    start = start + 1;
+	    quicksort(data, pivot + 1, end);
+	    end = end - 1;
+	}
+    }
 
     public static int quickselect(int[] ary, int k) {
 
@@ -80,7 +90,7 @@ public class Quick {
 	data[index1] = data[index2];
 	data[index2] = tracker;
     }
-    
+    /*
     public static void main(String[] args){
 	int[] ary = {9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5};
 	System.out.println(Quick.quickselect(ary,5) + " <- Should be 0");
@@ -90,12 +100,12 @@ public class Quick {
 	System.out.println(Quick.quickselect(ary1,13) + " <- Should be 5");
 	System.out.println(Quick.quickselect(ary1,0) + " <- Should be -3");
 	System.out.println(Quick.quickselect(ary1,ary1.length-1) + " <- Should be 9");
-	/*
+	
 	int[] ary2 = {3,6,1,2,4,6,8,99,1,2,32,45,123,-23,12,-30,-12,-3};
 	Quick.quicksort(ary2);
 	System.out.println("Your sorted array" + "\n" + Arrays.toString(ary2));
 	System.out.println("The correct array\n[-30, -23, -12, -3, 1, 1, 2, 2, 3, 4, 6, 6, 8, 12, 32, 45, 99, 123]");
-	*/
+	
 
 	//int[] data = {17, 61, 67, 47, 93, 12, 20, 4, 44, 68};
 	//System.out.println(Arrays.toString(data));
@@ -104,5 +114,6 @@ public class Quick {
 	//System.out.println(quickselect(data, 2));
 	//System.out.println(Arrays.toString(data));
     }
+    */
     
 }
