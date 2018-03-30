@@ -26,7 +26,7 @@ public class MyLinkedList{
 	    prev.setValue(value);
 	}
 
-	public int getValue(){
+	public Integer getValue(){
 	    return data;
 	}
 	public void setValue(Integer value){
@@ -40,7 +40,7 @@ public class MyLinkedList{
     
     public MyLinkedList(){
 	//makes an empty list
-	length = 0;
+	size = 0;
     }
 
     //private Node getNode(int index){}
@@ -50,13 +50,17 @@ public class MyLinkedList{
     public boolean add(Integer newData){
 	//adds the value to the end
 	Node current = new Node(newData);
-	last = current;
+	if (size() == 0){
+	    start = current;
+	}
+	end = current;
 	size = size + 1;
+	return true;
     }
 
     public int size(){
 	//returns number of elements in the list
-	Node current = first;
+	Node current = start;
 	while (current != null){
 	    size = size + 1;
 	    current = current.getNext();
@@ -66,9 +70,11 @@ public class MyLinkedList{
 
     public Integer get(int index){
 	//return value of element at specified index
-	//throws exceptions
+	if (index < 0 || index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
 	int CT = -1;
-	Node current = first;
+	Node current = start;
 	while (current != null){
 	    CT = CT + 1;
 	    if (CT == index){
@@ -76,6 +82,7 @@ public class MyLinkedList{
 	    }
 	    current = current.getNext();
 	}
+	return -1; //testing purposes
     }
 
     public Integer set(int index, Integer value){
@@ -83,22 +90,23 @@ public class MyLinkedList{
 	//return old value
 	//throws exceptions
 	int CT = -1;
-	Node current = first;
+	Node current = start;
 	while (current != null){
 	    CT = CT + 1;
 	    if (CT == index){
-		current.setValue(newValue);
+		current.setValue(value);
 		return current.getPrev().getValue();
 	    }
 	    current = current.getNext();
 	}
+	return -1; //testing purposes
     }
 
     public int indexOf(Integer value){
 	//returns index of 1st occurence of value
 	//returns -1 if not found
 	int CT = -1;
-	Node current = first;
+	Node current = start;
 	while (current != null){
 	    CT = CT + 1;
 	    if (current.getValue() == value){
@@ -113,30 +121,30 @@ public class MyLinkedList{
 	//insert new element at specified index
 	//throws exceptions
 	int CT = -1;
-	Node current = first;
+	Node current = start;
 	while (current != null){
 	    CT = CT + 1;
 	    if (CT == index){
 		//add element
-		length = length + 1;
+		size = size + 1;
 	    }
 	    current = current.getNext();
 	}
     }
-
+    /*
     public boolean remove(int index){
 	//remove element at specified index
 	//returns value removed
 	//throws exceptions
     }
+    */
 
-    public boolean remove(Integer value){}
+    //public boolean remove(Integer value){}
 
     public String toString(){
 	//returns string representation [0, 1, 2...]
 	String ans = "[";
-	int CT = 0;
-	Node current = first;
+	Node current = start;
 	while (current != null){
 	    if (current.getNext() == null){
 		ans = ans + current.getValue() + "]";
@@ -148,4 +156,23 @@ public class MyLinkedList{
 	}
 	return ans;
     }
+    
+    public static void main(String[] args){
+	MyLinkedList a = new MyLinkedList();
+
+	//for (int x = 0; x < 10; x++){
+	//a.add(new Integer((int)(Math.random()*100)));
+	//}
+	Integer b = new Integer(9);
+	Integer c = new Integer(10);
+	a.add(b);
+	a.add(c);
+
+	System.out.println(a);
+
+	//for (int y = 0; y < 10; y++){
+	    //System.out.println(y + ":" + a.get(y));
+	//}
+    }
+    
 }
