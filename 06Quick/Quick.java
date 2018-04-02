@@ -4,21 +4,23 @@ import java.util.*;
 public class Quick {
 
     public static void quicksort(int[] ary){
-	quicksort(ary, 0, ary.length - 1);
+	quicksortHelper(ary, 0, ary.length - 1);
     }
-
-    private static void quicksort(int[] data, int start, int end){
-	while (start < end){
-	    int pivot = partition(data, start, end);
-	    quicksort(data, start, pivot - 1);
-	    start = start + 1;
-	    quicksort(data, pivot + 1, end);
-	    end = end - 1;
+    
+    private static void quicksortHelper(int[] data, int start, int end){
+	if (start < end){
+	    int[] pivot = partition(data, start, end);
+	    quicksortHelper(data, start, pivot[0] - 1);
+	    quicksortHelper(data, pivot[1] + 1, end);
 	}
     }
+    
 
     public static int quickselect(int[] ary, int k) {
 
+	quicksort(ary);
+	return ary[k];
+	/*
 	int start = 0;
 	int end = ary.length - 1;
 
@@ -27,7 +29,7 @@ public class Quick {
 	}
 
 	if (k < partition(ary, start, end)){
-	    end = partition(ary, start, end);
+x	    end = partition(ary, start, end);
 	    partition(ary, start, end);
 	}
 
@@ -37,24 +39,29 @@ public class Quick {
 	}
 
 	return ary[k];
+	*/
+	
+	
     }
 
-    public static int partition(int[]data, int start, int end){
+    public static int[] partition(int[]data, int start, int end){
 
-	int pivotI = (int)(Math.random() * ((end - start) + 1) + start);
+	int pivotIndex = (int)(Math.random() * ((end - start) + 1) + start);
+	//swap(data, start, pivotIndex);
+	
+	//int small = start + 1;
+	//int large = end;
 
-	swap(data, start, pivotI);
-	int small = start + 1;
-	//int small = start;
+	int small = start;
 	int large = end;
-	//int index = small + 1;
-	//int pivot = data[pivotI];
-	/*
+	int index = start;
+	int pivot = data[pivotIndex];
+	
 	while (index <= large) {
 	    if (data[index] == pivot){
 		index = index + 1;
 	    }
-	    if (data[index] > pivot) {
+	    else if (data[index] > pivot) {
 		swap(data, index, large);
 		large = large - 1;
 	    }
@@ -64,9 +71,11 @@ public class Quick {
 		index = index + 1;
 	    }
 	}
-	*/
+
+	int[] ans = {small, large};
 	
-		    
+	
+	/*	    
 	while (small <= large) {
 	    if (data[small] < data[start]) {
 		small = small + 1;
@@ -77,11 +86,12 @@ public class Quick {
 	    }
 	    
 	}
+	*/
 	    
 
-	swap(data, large, start);
+	//swap(data, large, start);
 	
-	return large;
+	return ans;
     }
 
     private static void swap(int[] data, int index1, int index2){
@@ -106,14 +116,12 @@ public class Quick {
 	System.out.println("Your sorted array" + "\n" + Arrays.toString(ary2));
 	System.out.println("The correct array\n[-30, -23, -12, -3, 1, 1, 2, 2, 3, 4, 6, 6, 8, 12, 32, 45, 99, 123]");
 	
-
 	//int[] data = {17, 61, 67, 47, 93, 12, 20, 4, 44, 68};
 	//System.out.println(Arrays.toString(data));
-
 	//System.out.println(partition(data, 0, data.length - 1));
 	//System.out.println(quickselect(data, 2));
 	//System.out.println(Arrays.toString(data));
     }
     */
-    
+
 }
