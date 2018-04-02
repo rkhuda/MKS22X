@@ -97,35 +97,25 @@ public class USACO {
 	int endCol = inf.nextInt();
 
 	int[][] allPath = new int[row][col];
-	int[][] currentPath = new int[row][col];
-
-	for (int x = 0; x < row; x++) {
-	    for (int y = 0; y < col; y++){
-		allPath[x][y] = 0;
-		if (map[x][y] == '*'){
-		    allPath[x][y] = -1;
-		}
-	    }
-	}
-
 	allPath[startRow - 1][startCol - 1] = 1;
 	
 	int CT = 0;
 	while (CT < steps){
+	    int[][] currentPath = new int[row][col];
 	    for (int x = 0; x < row; x++){
 		for (int y = 0; y < col; y++){
-		    if (allPath[x][y] != -1){
-			if ((x+1) < row && allPath[x+1][y] != -1){
-			    currentPath[x][y] =  allPath[x+1][y] + 1;
+		    if (map[x][y] != '*'){
+			if ((x+1) < row){
+			    currentPath[x][y] = currentPath[x][y] + allPath[x+1][y];
 			}
-			if ((x-1) >= 0 && allPath[x-1][y] != -1){
-			    currentPath[x][y] = allPath[x-1][y] + 1;
+			if ((x-1) >= 0){
+			    currentPath[x][y] = currentPath[x][y] + allPath[x-1][y];
 			}
-			if ((y+1) < col && allPath[x][y+1] != -1){
-			    currentPath[x][y] = allPath[x][y+1] + 1;
+			if ((y+1) < col){
+			    currentPath[x][y] = currentPath[x][y] + allPath[x][y+1];
 			}
-			if ((y-1) >= 0 && allPath[x][y-1] != -1){
-			    currentPath[x][y] =  allPath[x][y-1] + 1;
+			if ((y-1) >= 0){
+			    currentPath[x][y] = currentPath[x][y] + allPath[x][y-1];
 			}
 		    }
 		}
@@ -139,10 +129,6 @@ public class USACO {
 	    CT = CT + 1;
 	}
 
-	return (allPath[endRow - 1][endCol - 1])/6;
+	return allPath[endRow - 1][endCol - 1];
     }
-
-    //public static void main(String[] args) throws FileNotFoundException{
-    //System.out.println(silver("test.txt"));
-    //}
 }
