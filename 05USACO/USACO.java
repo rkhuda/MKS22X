@@ -96,47 +96,53 @@ public class USACO {
 	int endRow = inf.nextInt();
 	int endCol = inf.nextInt();
 
+	int[][] allPath = new int[row][col];
 	int[][] currentPath = new int[row][col];
-	int[][] oldPath = new int[row][col];
 
 	for (int x = 0; x < row; x++) {
 	    for (int y = 0; y < col; y++){
-		currentPath[x][y] = 0;
-		oldPath[x][y] = 0;
+		allPath[x][y] = 0;
 		if (map[x][y] == '*'){
-		    currentPath[x][y] = -1;
-		    oldPath[x][y] = -1;
+		    allPath[x][y] = -1;
 		}
 	    }
 	}
 
-	int[][] moveCoordinate = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
-	int CT = 0;
+	allPath[startRow - 1][startCol - 1] = 1;
 	
+	int CT = 0;
 	while (CT < steps){
-	    for (int x = startRow - 1; x < row; x++){
-		for (int y = startCol - 1; y < col; y++){
-		    if (x + 1 < row && oldPath[x + 1][y] != -1){
-			oldPath[x + 1][y] = oldPath[x + 1][y] + 1;
-		    }
-		    if (x - 1 >= 0 && oldPath[x - 1][y] != -1){
-			oldPath[x - 1][y] = oldPath[x - 1][y] + 1;
-		    }
-		    if (y + 1 < col && oldPath[x][y + 1] != -1){
-			oldPath[x][y + 1] = oldPath[x][y + 1] + 1;
-		    }
-		    if (y - 1 >= 0 && oldPath[x][y - 1] != -1){
-			oldPath[x][y - 1] = oldPath[x][y - 1] + 1;
+	    for (int x = 0; x < row; x++){
+		for (int y = 0; y < col; y++){
+		    if (allPath[x][y] != -1){
+			if ((x+1) < row && allPath[x+1][y] != -1){
+			    currentPath[x][y] =  allPath[x+1][y] + 1;
+			}
+			if ((x-1) >= 0 && allPath[x-1][y] != -1){
+			    currentPath[x][y] = allPath[x-1][y] + 1;
+			}
+			if ((y+1) < col && allPath[x][y+1] != -1){
+			    currentPath[x][y] = allPath[x][y+1] + 1;
+			}
+			if ((y-1) >= 0 && allPath[x][y-1] != -1){
+			    currentPath[x][y] =  allPath[x][y-1] + 1;
+			}
 		    }
 		}
 	    }
+	    for (int x = 0; x < row; x++){
+		for (int y = 0; y < col; y++){
+		    allPath[x][y] = currentPath[x][y];
+		}
+	    }
+	    
 	    CT = CT + 1;
 	}
 
-	return oldPath[endRow - 1][endCol - 1];
+	return (allPath[endRow - 1][endCol - 1])/6;
     }
 
-    public static void main(String[] args) throws FileNotFoundException{
-	System.out.println(silver("test.txt"));
-    }
+    //public static void main(String[] args) throws FileNotFoundException{
+    //System.out.println(silver("test.txt"));
+    //}
 }
