@@ -171,7 +171,7 @@ public class MyLinkedList{
     }
 
     //removes element at specified index
-    public boolean remove(int index){
+    public Integer remove(int index){
 	if (index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -192,11 +192,11 @@ public class MyLinkedList{
 		    current.getNext().setPrev(current.getPrev());
 		}
 		size = size - 1;
-		return true;
+		return current;
 	    }
 	    CT = CT + 1;
 	}
-	return false;
+	return -1;
     }
     
     //removes 1st occurence of specified element
