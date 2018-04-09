@@ -139,9 +139,13 @@ public class MyLinkedList{
 
     //inserts new element at specified index
     public void add(int index, Integer value){
-	if (index < 0 || index >= size()){
+	if (size() == 0 && index == 0){
+	    add(value);
+	}
+	else if (index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
+	else{
 
 	int CT = 0;
 	Node current = start;
@@ -168,6 +172,7 @@ public class MyLinkedList{
 	    }
 	    CT = CT + 1;
 	    current = current.getNext();
+	}
 	}
 	
     }
