@@ -147,7 +147,7 @@ public class MyLinkedList{
 	
 	Node newNode = new Node(value);
 	Node current = getNode(index);
-	
+
 	if (index == size()){
 	    add(value);
 	}
@@ -237,6 +237,7 @@ public class MyLinkedList{
 	}
 	return ans;
     }
+    /*
     public static void main(String[]args){
       MyLinkedList nums = new MyLinkedList();
       LinkedList<Integer> nums2 = new LinkedList<>();
@@ -430,7 +431,7 @@ public class MyLinkedList{
       
       System.out.println("#Adding to 100000 values to the front, and 100000 to the end, should be fast.\n#If the next line doesn't print right away you have some issues.");
       for(int i = 0; i < 100000; i++  ){
-        nums.add(i);
+	nums.add(i);
         nums.add(nums.size(),i);
       }
       end = System.currentTimeMillis();
@@ -442,4 +443,5 @@ public class MyLinkedList{
         System.out.println("PASS "+ (end-start)+" msec current size: "+nums.size());
       }
     }
+    */
 }
