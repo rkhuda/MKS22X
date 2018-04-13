@@ -303,18 +303,31 @@ public class MyLinkedListImproved< T extends Comparable<T> > implements Iterable
 	}
 	return indexOf(minimum);
     }
+
+    public void extend(MyLinkedListImproved<T> other){
+	//in O(1) runtime, move the elements from other onto the end of this
+        //The size of other is reduced to 0
+        //The size of this is now the combined sizes of both original lists
+
+	for (T current : other){
+	    this.add(current);
+	}
+	other.clear();
+    }
     /*
     public static void main(String[] args){
-       
+	
 	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
 	n.add("fish");
 	n.add("henlo");
 	System.out.println(n);
+	
 
 	MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
         m.add(new Integer(0));
 	m.add(new Integer(1));
 	System.out.println(m);
+	//System.out.println(m.size());
 	
 	for (String s : n){
 	    System.out.println(s);
@@ -324,11 +337,15 @@ public class MyLinkedListImproved< T extends Comparable<T> > implements Iterable
 	    System.out.println(i + " ");
 	}
 	
+	
 	MyLinkedListImproved<Integer> test = new MyLinkedListImproved<>();
 	for(int i = 0; i < 5; i++  ){
 	    Integer data = i * 10;
 	    test.add(data);
 	}
+	System.out.println(test);
+	//System.out.println(test.size());
+	
 	for(Integer i : test){
 	    System.out.println(i + " ");
 	}
@@ -337,7 +354,16 @@ public class MyLinkedListImproved< T extends Comparable<T> > implements Iterable
 	System.out.println(test.max());
 	System.out.println(test.min());
 	System.out.println(test);
+	
+
+	m.extend(test);
+	System.out.println(m);
+	System.out.println(test);
+	System.out.println(m.size());
+	System.out.println(test.size());
+	
     }
     */
+    
     
 }
