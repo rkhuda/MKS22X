@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.*;
 
-public class MyLinkedListImproved<T> implements Iterable<T>{ 
+public class MyLinkedListImproved< T extends Comparable<T> > implements Iterable<T>{ 
 
     private class Node {
 
@@ -272,10 +272,40 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
     public Iterator<T> iterator(){
 	return new MyLLIterator(start);
     }
-    
+
+    public int max(){
+	
+	if (size() == 0){
+	    return -1;
+	}
+	
+	T maximum = start.getValue();
+	
+	for (T current : this){
+	    if (maximum.compareTo(current) < 0){
+		maximum = current;
+	    }
+	}
+	return indexOf(maximum);
+    }
+
+    public int min(){
+	if (size() == 0){
+	    return -1;
+	}
+	
+	T minimum = start.getValue();
+	
+	for (T current : this){
+	    if (minimum.compareTo(current) > 0){
+		minimum = current;
+	    }
+	}
+	return indexOf(minimum);
+    }
     /*
     public static void main(String[] args){
-	
+       
 	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
 	n.add("fish");
 	n.add("henlo");
@@ -302,6 +332,11 @@ public class MyLinkedListImproved<T> implements Iterable<T>{
 	for(Integer i : test){
 	    System.out.println(i + " ");
 	}
+	test.add(new Integer(100));
+	test.add(new Integer(-10));
+	System.out.println(test.max());
+	System.out.println(test.min());
+	System.out.println(test);
     }
     */
     
