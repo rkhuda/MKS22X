@@ -104,6 +104,7 @@ public class MyHeap {
 	return ans;
     }
 
+    /*
     public static void main(String[] args){
 	MyHeap test = new MyHeap(false);
 	//System.out.println(test);
@@ -138,5 +139,6 @@ public class MyHeap {
 	System.out.println(test.size());
 	System.out.println(test.data.length);
     }
+    */
     
 }
