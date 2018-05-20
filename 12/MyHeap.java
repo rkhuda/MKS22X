@@ -1,25 +1,28 @@
-public class MyHeap {
+public class MyHeap<T extends Comparable<T>> {
 
-    private String[] data;
+    private T[] data;
     private int size;
     private boolean isMax;
-    
+
+    @SuppressWarnings("unchecked")
     public MyHeap() {
-	data = new String[10];
+	data = (T[])new Comparable[10];
 	isMax = true;
 	size = 0;
     }
+
+    @SuppressWarnings("unchecked")
     public MyHeap(boolean max){
-	data = new String[10];
+	data = (T[])new Comparable[10];
 	isMax = max;
 	size = 0;
     }
 
-    public void add(String s){
+    public void add(T value){
 	if (size == data.length){
 	    resize();
 	}
-	data[size()] = s;
+	data[size()] = value;
 	size = size + 1;
 	addHelp(size() - 1);
     }
@@ -41,9 +44,10 @@ public class MyHeap {
 	}
     }
 
-    public String remove(){
-	String ans = data[0];
-	String[] temp = new String[data.length];
+    @SuppressWarnings("unchecked")
+    public T remove(){
+	T ans = data[0];
+	T[] temp = (T[])new Comparable[data.length];
 	temp[0] = data[size() - 1];
 	for (int x = 1; x < size() - 1; x++){
 	    temp[x] = data[x];
@@ -70,7 +74,7 @@ public class MyHeap {
 	}
     }
 
-    public String peek(){
+    public T peek(){
 	return data[0];
     }
 
@@ -78,8 +82,9 @@ public class MyHeap {
 	return size;
     }
 
+    @SuppressWarnings("unchecked")
     private void resize(){
-	String[] temp = new String[data.length * 2];
+	T[] temp = (T[])new Comparable[data.length * 2];
 	for (int x = 0; x < data.length; x++){
 	    temp[x] = data[x];
 	}
@@ -87,7 +92,7 @@ public class MyHeap {
     }
 
     private  void swap(int index1, int index2){
-	String tracker = data[index1];
+	T tracker = data[index1];
 	data[index1] = data[index2];
 	data[index2] = tracker;
     }
@@ -106,7 +111,7 @@ public class MyHeap {
 
     /*
     public static void main(String[] args){
-	MyHeap test = new MyHeap(false);
+	MyHeap<String> test = new MyHeap<String>(false);
 	//System.out.println(test);
 	//System.out.println(test.size());
 	//System.out.println(test.data.length);
@@ -114,8 +119,10 @@ public class MyHeap {
 	test.add("A");
 	test.add("B");
 	test.add("C");
+	
 	test.add("D");
 	test.add("E");
+	
 	test.add("F");
 	test.add("G");
 	test.add("H");
@@ -126,19 +133,21 @@ public class MyHeap {
 	test.add("M");
 	test.add("N");
 	test.add("O");
+	
 	test.add("B");
 	//test.add("I");
 	
 	System.out.println(test);
-	//System.out.println(test.size());
-	//System.out.println(test.data.length);
+	System.out.println(test.size());
 
 	
 	System.out.println(test.remove());
 	System.out.println(test);
+	
 	System.out.println(test.size());
-	System.out.println(test.data.length);
+	
     }
     */
+    
     
 }
