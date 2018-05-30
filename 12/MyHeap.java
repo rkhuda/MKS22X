@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyHeap<T extends Comparable<T>> {
 
     private T[] data;
@@ -31,13 +33,13 @@ public class MyHeap<T extends Comparable<T>> {
 	if (index > 0){
 	    if (isMax){
 		if (data[(index - 1) / 2].compareTo(data[index]) < 0){
-		    swap((index - 1) / 2, index);
+		    swap(data, (index - 1) / 2, index);
 		    addHelp((index - 1) / 2);
 		}
 	    }
 	    else {
 		if (data[(index - 1) / 2].compareTo(data[index]) > 0){
-		    swap((index - 1) / 2, index);
+		    swap(data, (index - 1) / 2, index);
 		    addHelp((index - 1) / 2);
 		}
 	    }
@@ -49,7 +51,7 @@ public class MyHeap<T extends Comparable<T>> {
 	T ans = data[0];
 	T[] temp = (T[])new Comparable[data.length];
 	temp[0] = data[size() - 1];
-	for (int x = 1; x < size() - 1; x++){
+	for (int x = 1; x < size(); x++){
 	    temp[x] = data[x];
 	}
 	data = temp;
@@ -60,20 +62,23 @@ public class MyHeap<T extends Comparable<T>> {
     private void removeHelp(int index){
 	if (index < size()){
 	    if (isMax){
-		if (data[(2*index) + 1].compareTo(data[index]) < 0){
-		    swap((2*index) + 1, index);
+		if ( (2*index) + 1 < size() &&
+		    data[index].compareTo(data[(2*index) + 1]) < 0){
+		    swap(data, (2*index) + 1, index);
 		    removeHelp((2*index) + 1);
 		}
 	    }
 	    else {
-		if (data[(2*index) + 1].compareTo(data[index]) > 0){
-		    swap((2*index) + 1, index);
+		
+		if ( (2*index) + 1 < size() &&
+		    data[index].compareTo(data[(2*index) + 1]) > 0 ){
+		    swap(data, (2*index) + 1, index);
 		    removeHelp((2*index) + 1);
 		}
 	    }
 	}
     }
-
+    
     public T peek(){
 	return data[0];
     }
@@ -91,10 +96,10 @@ public class MyHeap<T extends Comparable<T>> {
 	data = temp;
     }
 
-    private  void swap(int index1, int index2){
-	T tracker = data[index1];
-	data[index1] = data[index2];
-	data[index2] = tracker;
+    private  void swap(T[] d, int index1, int index2){
+	T tracker = d[index1];
+	d[index1] = d[index2];
+	d[index2] = tracker;
     }
 
     public String toString(){
@@ -112,16 +117,24 @@ public class MyHeap<T extends Comparable<T>> {
     /*
     public static void main(String[] args){
 	MyHeap<String> test = new MyHeap<String>(false);
-	//System.out.println(test);
-	//System.out.println(test.size());
-	//System.out.println(test.data.length);
 	
 	test.add("A");
 	test.add("B");
+	test.add("B");
 	test.add("C");
+	test.add("B");
+	test.add("A");
+	test.add("A");
+	test.add("A");
+	System.out.println(test);
+	
 	
 	test.add("D");
 	test.add("E");
+	System.out.println(test);
+	System.out.println(test.remove());
+	System.out.println(test);
+	
 	
 	test.add("F");
 	test.add("G");
@@ -139,15 +152,16 @@ public class MyHeap<T extends Comparable<T>> {
 	
 	System.out.println(test);
 	System.out.println(test.size());
-
 	
 	System.out.println(test.remove());
 	System.out.println(test);
 	
 	System.out.println(test.size());
 	
+	
+	
     }
     */
     
-    
+
 }
