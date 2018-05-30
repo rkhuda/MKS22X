@@ -35,8 +35,21 @@ public class MyDeque<E> {
     @SuppressWarnings("unchecked")
     private void resize(){
 	E[] temp = (E[]) new Object[data.length * 2];
-	for (int x = 0; x < data.length; x++){
-	    temp[x] = data[x];
+	if (front <= back){
+	    for (int x = 0; x < data.length; x++){
+		temp[x] = data[x];
+	    }
+	}
+	else {
+	    int index = 0;
+	    for (int x = front; x < data.length; x++){
+		temp[index] = data[x];
+		index++;
+	    }
+	    for (int x = 0; x <= back; x++){
+		temp[index] = data[x];
+		index++;
+	    }
 	}
 	data = temp;
 	front = 0;
@@ -72,22 +85,34 @@ public class MyDeque<E> {
 	if (element == null){
 	    throw new NullPointerException();
 	}
-	if (size() == data.length || front == back + 1 ||
-	    back == front + 1){
+	if (size() == data.length || front == back + 1 || back == front + 1){
 	    resize();
 	}
-        data[back + 1] = element;
-	back = back + 1;
+	if (size == 0){
+	    data[0] = element;
+	}
+        else {
+	    if (back == data.length - 1){
+		data[0] = element;
+		back = 0;
+	    }
+	    else {
+		data[back + 1] = element;
+		back = back + 1;
+	    }
+	}
 	size = size + 1;
     }
 
     public E removeFirst(){
 
-	E ans = data[front];
 	if (size() == 0){
 	    throw new NoSuchElementException();
 	}
-	if (front == size() - 1){
+	
+	E ans = data[front];
+	data[front] = null;
+	if (front == data.length - 1){
 	    front = 0;
 	}
 	else {
@@ -99,10 +124,12 @@ public class MyDeque<E> {
 
     public E removeLast(){
 
-	E ans = data[back];
 	if (size() == 0){
 	    throw new NoSuchElementException();
 	}
+	
+	E ans = data[back];
+	data[back] = null;
 	if (back == 0){
 	    back = data.length - 1;
 	}
@@ -149,20 +176,22 @@ public class MyDeque<E> {
 	return ans;
     }
     */
+    
 
     /*
     public static void main(String[] args){
 	MyDeque<String> a = new MyDeque<>();
 	a.addFirst("0");
 	a.addLast("1");
-	System.out.println(a);
-	System.out.println(a.removeFirst());
-	System.out.println(a);
-	System.out.println(a.removeLast());
-	System.out.println(a);
-	System.out.println(a.getLast());
+	System.out.println(a); // [0, 1]
+	System.out.println(a.removeFirst()); // 0
+	System.out.println(a); // [1]
+	System.out.println(a.removeLast()); // 1
+	System.out.println(a); // []
+	System.out.println(a.getLast()); //exception
     }
     */
+    
 
     /*
     public static void main(String[] args) {
