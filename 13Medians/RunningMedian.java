@@ -71,38 +71,41 @@ public class RunningMedian {
 	//System.out.println(a.size());
 
 	a.add(60.0);
-	System.out.println(a);
-	System.out.println(a.getMedian());
-	System.out.println(a.size());
+	//System.out.println(a);
+	//System.out.println(a.getMedian());
+	//System.out.println(a.size());
 	
 
 	a.add(50.0);
-	System.out.println(a);
-	System.out.println(a.getMedian());
-	System.out.println(a.size());
+	//System.out.println(a);
+	//System.out.println(a.getMedian());
+	//System.out.println(a.size());
 
+	
 	a.add(30.0);
-	System.out.println(a);
-	System.out.println(a.getMedian());
-	System.out.println(a.size());
+	//System.out.println(a);
+	//System.out.println(a.getMedian());
+	//System.out.println(a.size());
 
+	
 	//doesnt work
 	a.add(40.0);
-	System.out.println(a);
-	System.out.println(a.getMedian());
-	System.out.println(a.size());
+	//System.out.println(a);
+	//System.out.println(a.getMedian());
+	//System.out.println(a.size());
 	
 
 	
 	a.add(70.0);
-	System.out.println(a);
-	System.out.println(a.getMedian());
-	System.out.println(a.size());
+	//System.out.println(a);
+	//System.out.println(a.getMedian());
+	//System.out.println(a.size());
 
+	
 	a.add(40.0);
-	System.out.println(a);
-	System.out.println(a.getMedian());
-	System.out.println(a.size());
+	//System.out.println(a);
+	//System.out.println(a.getMedian());
+	//System.out.println(a.size());
 
 	
 	a.add(90.0);
@@ -120,4 +123,5 @@ public class RunningMedian {
        
     }
     */
+    
 }
