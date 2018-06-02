@@ -62,18 +62,28 @@ public class MyHeap<T extends Comparable<T>> {
     private void removeHelp(int index){
 	if (index < size()){
 	    if (isMax){
-		if ( (2*index) + 1 < size() &&
-		    data[index].compareTo(data[(2*index) + 1]) < 0){
-		    swap(data, (2*index) + 1, index);
-		    removeHelp((2*index) + 1);
+		if ( (2*index) + 1 < size() ){
+		    if (data[index].compareTo(data[(2*index) + 1]) < 0){
+			swap(data, (2*index) + 1, index);
+			removeHelp((2*index) + 1);
+		    }
+		    if (data[index].compareTo(data[(2*index) + 2]) < 0){
+			swap(data, (2*index) + 2, index);
+			removeHelp((2*index) + 2);
+		    }
 		}
 	    }
 	    else {
 		
-		if ( (2*index) + 1 < size() &&
-		    data[index].compareTo(data[(2*index) + 1]) > 0 ){
-		    swap(data, (2*index) + 1, index);
-		    removeHelp((2*index) + 1);
+		if ( (2*index) + 1 < size() ){
+		    if (data[index].compareTo(data[(2*index) + 1]) > 0){
+			swap(data, (2*index) + 1, index);
+			removeHelp((2*index) + 1);
+		    }
+		    if (data[index].compareTo(data[(2*index) + 2]) > 0){
+			swap(data, (2*index) + 2, index);
+			removeHelp((2*index) + 2);
+		    }
 		}
 	    }
 	}
