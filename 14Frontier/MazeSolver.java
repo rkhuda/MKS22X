@@ -20,10 +20,10 @@ public class MazeSolver {
 	if (mode == 0){
 	    frontier = new FrontierQueue();
 	}
-	if (mode == 1){
+	else if (mode == 1){
 	    frontier = new FrontierStack();
 	}
-	if (mode == 2){
+	else if (mode == 2){
 	    frontier = new FrontierPriorityQueue();
 	}
 	else {
@@ -66,5 +66,16 @@ public class MazeSolver {
 
     public String toString(){
 	return maze.toString();
+    }
+
+    public static void main(String[] args){
+	MazeSolver a = new MazeSolver("test.txt");
+	//a.solve();
+	a.solve(0);
+	//a.solve(1);
+	//a.solve(2);
+	//a.solve(3);
+	//a.solve(4);
+	
     }
 }
