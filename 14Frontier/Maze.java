@@ -21,25 +21,41 @@ public class Maze{
     public Location[] getNeighbors(Location L){
 	Location[] ans = new Location[4];
 	int right = L.getX() + 1;
+	int left = L.getX() - 1;
 	int down = L.getY() + 1;
 	int up = L.getY() - 1;
-	int left = L.getX() - 1;
 	for (int x = 0; x < ans.length; x++){
 	    if (right < maze[0].length && (maze[right][L.getY()] == ' ' ||
 				       maze[right][L.getY()] == 'E') ) {
-		ans[x] = new Location(right, L.getY(), L, 0);
+		double dist = Math.abs(right - end.getX()) + Math.abs(L.getY() - end.getY());
+		if (aStar){
+		    dist = dist + L.getDist();
+		}
+		ans[x] = new Location(right, L.getY(), L, dist, L.getDist() + 1);
 	    }
 	    if (left >= 0 && (maze[right][L.getY()] == ' ' ||
 			      maze[right][L.getY()] == 'E') ) {
-		ans[x] = new Location(left, L.getY(), L, 0);
+		double dist = Math.abs(left - end.getX()) + Math.abs(L.getY() - end.getY());
+		if (aStar){
+		    dist = dist + L.getDist();
+		}
+		ans[x] = new Location(left, L.getY(), L, dist, L.getDist() + 1);
 	    }
 	    if (up >= 0 && (maze[L.getX()][up] == ' ' ||
 			    maze[L.getX()][up] == 'E') ) {
-		ans[x] = new Location(L.getX(), up, L, 0);
+		double dist = Math.abs(L.getX() - end.getX()) + Math.abs(up - end.getY());
+		if (aStar){
+		    dist = dist + L.getDist();
+		}
+		ans[x] = new Location(L.getX(), up, L, dist, L.getDist() + 1);
 	    }
 	    if (down < maze.length && (maze[L.getX()][down] == ' ' ||
 			    maze[L.getX()][down] == 'E') ) {
-		ans[x] = new Location(L.getX(), down, L, 0);
+		double dist = Math.abs(L.getX() - end.getX()) + Math.abs(down - end.getY());
+		if (aStar){
+		    dist = dist + L.getDist();
+		}
+		ans[x] = new Location(L.getX(), down, L, dist, L.getDist() + 1);
 	    }
 	}
 	return ans;
@@ -116,8 +132,8 @@ public class Maze{
 	  The start/end Locations may need more information later when we add
 	  other kinds of frontiers!
 	*/
-	end = new Location(endr, endc, null, 0);
-	start = new Location(startr, startc, null, 0);
+	end = new Location(endr, endc, null, 0, 0);
+	start = new Location(startr, startc, null, 0, 0);
     }
 
     public String toStringColor(){
