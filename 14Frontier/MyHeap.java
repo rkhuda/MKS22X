@@ -50,7 +50,9 @@ public class MyHeap<T extends Comparable<T>> {
     public T remove(){
 	T ans = data[0];
 	T[] temp = (T[])new Comparable[data.length];
-	temp[0] = data[size() - 1];
+	if (size() > 0){
+	    temp[0] = data[size() - 1];
+	}
 	for (int x = 1; x < size(); x++){
 	    temp[x] = data[x];
 	}
@@ -67,7 +69,7 @@ public class MyHeap<T extends Comparable<T>> {
 			swap(data, (2*index) + 1, index);
 			removeHelp((2*index) + 1);
 		    }
-		    if (data[index].compareTo(data[(2*index) + 2]) < 0){
+		    else if (data[index].compareTo(data[(2*index) + 2]) < 0){
 			swap(data, (2*index) + 2, index);
 			removeHelp((2*index) + 2);
 		    }
@@ -80,7 +82,7 @@ public class MyHeap<T extends Comparable<T>> {
 			swap(data, (2*index) + 1, index);
 			removeHelp((2*index) + 1);
 		    }
-		    if (data[index].compareTo(data[(2*index) + 2]) > 0){
+		    else if (data[index].compareTo(data[(2*index) + 2]) > 0){
 			swap(data, (2*index) + 2, index);
 			removeHelp((2*index) + 2);
 		    }
