@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MazeSolver {
 
     private Maze maze;
@@ -34,10 +36,12 @@ public class MazeSolver {
 	frontier.add(maze.getStart());	
 	while (frontier.hasNext()){
 	    Location next = frontier.next();
+	    //System.out.println(next);
 	    if ( !(next.equals(maze.getStart())) ){
 		maze.set(next.getX(), next.getY(), '.');
 	    }
 	    Location[] neighbors = maze.getNeighbors(next);
+	    //System.out.println(Arrays.toString(neighbors));
 	    for (int x = 0; x < neighbors.length; x++){
 		if (neighbors[x] != null){
 		    int xcor = neighbors[x].getX();
@@ -68,14 +72,17 @@ public class MazeSolver {
 	return maze.toString();
     }
 
+    /*
     public static void main(String[] args){
 	MazeSolver a = new MazeSolver("test.txt");
-	//a.solve();
-	a.solve(0);
+	System.out.println(a.solve());
+	//a.solve(0);
+	System.out.print(a);
 	//a.solve(1);
 	//a.solve(2);
 	//a.solve(3);
 	//a.solve(4);
 	
     }
+    */
 }
